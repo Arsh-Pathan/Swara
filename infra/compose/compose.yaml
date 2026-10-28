@@ -1,0 +1,47 @@
+services:
+  swara:
+    build:
+      context: ../..
+      dockerfile: infra/docker/Dockerfile
+    image: csky/swara:1.0.0
+    container_name: swara-engine
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      - SWARA_API_HOST=0.0.0.0
+      - SWARA_API_PORT=8000
+      - SWARA_INTRA_OP_NUM_THREADS=4
+      - SWARA_INTER_OP_NUM_THREADS=2
+      - SWARA_IDENTIFICATION_THRESHOLD=0.68
+      - SWARA_DIARIZATION_CLUSTERING_THRESHOLD=0.65
+      # Optional: set an API key for production
+      # - SWARA_API_KEY=your-secure-production-api-key
+    volumes:
+      - swara-models:/app/models/cache
+      - swara-data:/app/data/speakers
+    deploy:
+      resources:
+        limits:
+          cpus: "4.0"
+          memory: 1024M
+        reservations:
+          cpus: "1.0"
+          memory: 256M
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "20m"
+        max-file: "5"
+
+volumes:
+  swara-models:
+    name: swara_models_cache
+  swara-data:
+    name: swara_speaker_data

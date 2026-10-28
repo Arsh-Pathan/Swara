@@ -1,0 +1,20 @@
+# Swara Speaker Verification Evaluation Configuration
+name: "Swara-Standard-Evaluation"
+description: "Cross-speaker verification trial protocol assessing EER and minDCF"
+
+trials:
+  - audio_1: "samples/alice_enroll.wav"
+    audio_2: "samples/alice_test.wav"
+    is_same_speaker: true
+
+  - audio_1: "samples/bob_enroll.wav"
+    audio_2: "samples/bob_test.wav"
+    is_same_speaker: true
+
+  - audio_1: "samples/alice_enroll.wav"
+    audio_2: "samples/bob_test.wav"
+    is_same_speaker: false
+
+  - audio_1: "samples/bob_enroll.wav"
+    audio_2: "samples/alice_test.wav"
+    is_same_speaker: false

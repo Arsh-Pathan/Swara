@@ -1,0 +1,45 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "swara"
+version = "1.0.0"
+description = "Production-ready, ultra-low-latency, lightweight local speaker intelligence AI system."
+readme = "README.md"
+authors = [{ name = "CSKY Engineering", email = "engineering@csky.ai" }]
+license = { text = "Apache-2.0" }
+requires-python = ">=3.9"
+dependencies = [
+    "numpy>=1.24.0",
+    "scipy>=1.10.0",
+    "soundfile>=0.12.0",
+    "onnxruntime>=1.16.0",
+    "fastapi>=0.100.0",
+    "uvicorn>=0.23.0",
+    "pydantic>=2.0.0",
+    "pydantic-settings>=2.0.0",
+    "click>=8.0.0",
+    "rich>=13.0.0",
+    "requests>=2.28.0",
+    "python-multipart>=0.0.6",
+    "pyyaml>=6.0",
+    "psutil>=5.9.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-asyncio>=0.21.0",
+    "httpx>=0.24.0",
+]
+microphone = [
+    "sounddevice>=0.4.6",
+]
+
+[project.scripts]
+swara = "swara.cli.main:cli"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["swara*"]

@@ -1,0 +1,36 @@
+# Default application configuration for Swara
+app:
+  name: "Swara"
+  company: "CSKY"
+  tagline: "Every Voice Has an Identity."
+  version: "1.0.0"
+
+audio:
+  target_sample_rate: 16000
+  max_duration_seconds: 1800.0
+  max_upload_size_mb: 50.0
+
+vad:
+  onset_threshold: 0.50
+  offset_threshold: 0.35
+  min_speech_duration_ms: 250
+  min_silence_duration_ms: 200
+
+embedding:
+  model_id: "wespeaker_resnet34"
+  use_int8: false
+  dimension: 256
+  execution_provider: "CPUExecutionProvider"
+
+identification:
+  threshold: 0.68
+  unknown_threshold: 0.60
+  min_enrollment_duration_s: 0.8
+  min_identification_duration_s: 0.5
+
+diarization:
+  clustering_threshold: 0.65
+  window_size_s: 1.5
+  step_size_s: 0.75
+  collar_s: 0.35
+  identity_match_threshold: 0.70

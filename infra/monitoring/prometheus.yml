@@ -1,0 +1,13 @@
+# Prometheus metrics scraping configuration for Swara
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+scrape_configs:
+  - job_name: "swara-speaker-intelligence"
+    metrics_path: "/metrics"
+    static_configs:
+      - targets: ["swara:8000"]
+        labels:
+          service: "swara"
+          env: "production"
